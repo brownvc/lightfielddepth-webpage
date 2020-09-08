@@ -41,18 +41,27 @@ redirect_from: lightfielddepth/
 	  <a href="https://github.com/brownvc/lightfielddepth"><img src="img/github-logo.png" onmouseover="this.src='img/github-logo-over.png'" onmouseout="this.src='img/github-logo.png'"/></a>
 	</div>
 	<div class="icon">
-	  <a href="https://www.bmvc2020-conference.com/assets/supp/0395_supp.mp4"><img src="img/video-logo.png" onmouseover="this.src='img/video-logo-over.png'" onmouseout="this.src='img/video-logo.png'"/></a>
+	  <a href="https://www.bmvc2020-conference.com/conference/papers/paper_0395.html"><img src="img/video-logo.png" onmouseover="this.src='img/video-logo-over.png'" onmouseout="this.src='img/video-logo.png'"/></a>
 	</div>
       </div>
       <span style="display:block;clear:both"></>
     </div>
 
-    <div class="abstract">
+    <div class="section">
       <h3 style="font-family:aaargh">Abstract</h3>
       We propose a method to compute depth maps for every sub-aperture image in a lightfield in a view consistent way.  Previous light field depth estimation methods typically estimate a depth map only for the central
       sub-aperture view, and struggle with view consistent estimation.  Our method precisely defines depth edges via EPIs, then we diffus ethese edges spatially within the central view. These depth estimates are then
       propagated to all other views in an occlusion-aware way. Finally, disoccluded regions are completed by diffusion in EPI space. Our method runs efficiently with respect to both other classical and deep learning-based
       approaches, and achieves competitive quantitative metrics and qualitative performance on both synthetic and real-world light fields.
+    </div>
+
+    <div class="section">
+      <h3 style="font-family:aaargh">Supplementary Video</h3>
+      <div style="text-align:center">
+	<video width="100%" controls>
+	  <source src="video/bmvc2020_supplementary_vid.mp4" type="video/mp4">
+	</video>
+      </div>
     </div>
 
     <div class="citation">
