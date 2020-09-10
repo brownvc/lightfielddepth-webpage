@@ -36,7 +36,7 @@ body {
 }
 
 .icon {
-    width:33%;
+    width:25%;
     float:left;
 }
 
@@ -51,6 +51,12 @@ body {
     padding: 20px 0px 0px 0px;
     font-family: Arial, Helvetica, sans-serif;
     text-align:justify;
+}
+
+.videocontainer {
+    margin: auto;
+    width: 50%;
+    padding: 0px;
 }
 
 .citation {
