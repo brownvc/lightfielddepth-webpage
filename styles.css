@@ -53,6 +53,12 @@ body {
     text-align:justify;
 }
 
+.videocontainer {
+    margin: auto;
+    width: 50%;
+    padding: 0px;
+}
+
 .citation {
     margin: auto;
     width: 50%;
