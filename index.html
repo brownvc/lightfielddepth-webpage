@@ -6,8 +6,8 @@ redirect_from: lightfielddepth/
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="styles.css" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>View-consistent 4D Light Field Depth Estimation</title>
@@ -19,7 +19,6 @@ redirect_from: lightfielddepth/
       <h4>BMVC 2020</h4>
 
       <div class="author-container">
-
 	<div class="author">
 	  <a href="https://cs.brown.edu/~nkhan6">Numair Khan</a></br>
 	  Brown University
@@ -34,45 +33,53 @@ redirect_from: lightfielddepth/
 	  <a href="http://www.jamestompkin.com">James Tompkin</a></br>
 	  Brown University
 	</div>
-	
       </div>
-
-      <div class="icon-container">
-	<div class="icon">
-	  <a href="https://www.bmvc2020-conference.com/assets/papers/0395.pdf"><img src="img/pdf-logo.png" onmouseover="this.src='img/pdf-logo-over.png'" onmouseout="this.src='img/pdf-logo.png'"/></a>
-	</div>
-	<div class="icon">
-	  <a href="https://github.com/brownvc/lightfielddepth"><img src="img/github-logo.png" onmouseover="this.src='img/github-logo-over.png'" onmouseout="this.src='img/github-logo.png'"/></a>
-	</div>
-	<div class="icon">
-	  <a href="https://www.bmvc2020-conference.com/conference/papers/paper_0395.html"><img src="img/video-logo.png" onmouseover="this.src='img/video-logo-over.png'" onmouseout="this.src='img/video-logo.png'"/></a>
-	</div>
-      </div>
-      <span style="display:block;clear:both"></span>
     </div>
+
+    <div class="icon-container">
+      <div class="icon">
+	<a href="https://www.bmvc2020-conference.com/assets/papers/0395.pdf"><img src="img/pdf-logo.png" onmouseover="this.src='img/pdf-logo-over.png'" onmouseout="this.src='img/pdf-logo.png'"/></a>
+      </div>
+      <div class="icon">
+	<a href="https://arxiv.org/abs/2009.04065"><img src="img/arXiv-logo.png" onmouseover="this.src='img/arXiv-logo-over.png'" onmouseout="this.src='img/arXiv-logo.png'"/></a>
+      </div>
+      <div class="icon">
+	<a href="https://github.com/brownvc/lightfielddepth"><img src="img/github-logo.png" onmouseover="this.src='img/github-logo-over.png'" onmouseout="this.src='img/github-logo.png'"/></a>
+      </div>
+      <div class="icon">
+	<a href="https://www.bmvc2020-conference.com/assets/supp/0395_supp.mp4"><img src="img/video-logo.png" onmouseover="this.src='img/video-logo-over.png'" onmouseout="this.src='img/video-logo.png'"/></a>
+      </div>
+    </div>
+    <span style="display:block;clear:both;height:2em"></span>
+
 
     <div class="section">
       <div class="container" style="width:100%; padding:0px;">
-	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+	<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="10000">
 	  <!-- Indicators -->
 	  <ol class="carousel-indicators">
 	    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 	    <li data-target="#myCarousel" data-slide-to="1"></li>
 	    <li data-target="#myCarousel" data-slide-to="2"></li>
+	    <li data-target="#myCarousel" data-slide-to="3"></li>
 	  </ol>
 	  
 	  <!-- Wrapper for slides -->
 	  <div class="carousel-inner">
 	    <div class="item active">
-	      <img src="img/bunny.gif" style="width:100%;">
+	      <img src="img/cotton_novel.gif" style="width:100%;">
 	    </div>
 	    
 	    <div class="item">
-	      <img src="img/bunny.gif" style="width:100%;">
+	      <img src="img/boxes_novel.gif" style="width:100%;">
 	    </div>
 	    
 	    <div class="item">
-	      <img src="img/bunny.gif" style="width:100%;">
+	      <img src="img/dino_novel.gif" style="width:100%;">
+	    </div>
+	    
+	    <div class="item">
+	      <img src="img/sideboard_novel.gif" style="width:100%;">
 	    </div>
 	  </div>
 	  
@@ -86,9 +93,7 @@ redirect_from: lightfielddepth/
 	    <span class="sr-only">Next</span>
 	  </a>
 	</div>
-	
       </div>
-      
     </div>
 
     
@@ -100,24 +105,6 @@ redirect_from: lightfielddepth/
       approaches, and achieves competitive quantitative metrics and qualitative performance on both synthetic and real-world light fields.
     </div>
 
-    <div class="section">
-      <h3 style="font-family:aaargh">Supplementary Results</h3>
-      <div style="text-align:center">
-	<video width="100%" controls>
-	  <source src="video/bmvc2020_supplementary_vid.mp4" type="video/mp4">
-	</video>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3 style="font-family:aaargh">Demo: Light Field Editing</h3>
-      <div style="text-align:center">
-	<video width="100%" controls autoplay loop muted>
-	  <source src="video/bunny_editing.mp4" type="video/mp4">
-	</video>
-      </div>
-    </div>
-    
     <div class="citation">
       <h3 style="font-family:aaargh">Citation</h3>
       <div style="background-color:rgba(230, 230, 230, 1.0); padding:20px">
@@ -127,12 +114,25 @@ redirect_from: lightfielddepth/
 	  author={Numair Khan, Min H. Kim, James Tompkin}, </br>
 	  journal={British Machine Vision Conferfence}, </br>
 	  year={2020}, </br>
-	  </div>
+	</div>
 	}</br>
       </div>
     </div>
-    </br>
-    </br>
+    
+    <div class="section">
+      <h3 style="font-family:aaargh">Demo: Light Field Editing</h3>
+      <div style="text-align:center">
+	<video width="100%" controls autoplay loop muted>
+	  <source src="video/bunny_editing.mp4" type="video/mp4">
+	</video>
+      </div>
+    </div>
+
+    <div class="videocontainer">
+      <h3 style="font-family:aaargh">Supplemental Video</h3>
+      <video src="https://www.bmvc2020-conference.com/assets/supp/0395_supp.mp4" width="100%" controls></video>
+    </div>
+      
     
   </body>
 
