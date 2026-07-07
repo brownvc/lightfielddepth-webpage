@@ -3,269 +3,205 @@ redirect_from: lightfielddepth/
 ---
 
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>4D Light Field Depth Estimation</title>
-  </head>
+<html lang="en">
 
-  <body>
-	
-	<div class="section">
-		<div class="title">
-		<h1>4D Light Field Depth Estimation</h1>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<div class="author-container">
-			<div class="author">
-				<a href="https://cs.brown.edu/~nkhan6">Numair Khan</a></br>
-				Brown University
-			</div>
-			
-			<div class="author">
-				<a href="http://vclab.kaist.ac.kr/minhkim/">Min H. Kim</a></br>
-				KAIST
-			</div>
+  <title>Edge-aware Bidirectional Diffusion (BMVC 2021) and View-consistent 4D Light Field Depth Estimation (BMVC 2020)</title>
 
-			<div class="author">
-				<a href="http://www.jamestompkin.com">James Tompkin</a></br>
-				Brown University
-			</div>
-		</div>
-		</div>
+  <!-- Brown brand fonts (Minion 3 + Freight Sans), the lab's Adobe Fonts kit. -->
+  <link rel="preconnect" href="https://use.typekit.net" crossorigin>
+  <link rel="stylesheet" href="https://use.typekit.net/diw5pgv.css">
 
-		<span style="display:block;clear:both;height:2em"></span>
+  <!-- Shared BVC project-page styles + JS (bar, logo registry, theme). -->
+  <link rel="stylesheet" href="https://visual.cs.brown.edu/projects/shared/project.css">
+  <script defer src="https://visual.cs.brown.edu/projects/shared/project.js"></script>
 
-		<p>
-			Estimating depth from light field images for photographic editing require high accuracy, view consistency, and fast processing. We present an efficient and accurate method based on finding sparse depth and occlusion edges, then diffusing these edges into smooth depth regions.
-			This is described in two papers: the first estimates depth for the central light field view, and the second reprojects this depth and completes missing areas through edge-guided inpainting.
-		</p>
-		
-		<span style="display:block;clear:both;height:2em"></span>
+  <!-- Pre-paint theme: apply the stored/OS choice before first render (no
+       flash). Same localStorage 'theme' key + attribute as visual.cs.brown.edu. -->
+  <script>
+    (function () {
+      var t; try { t = localStorage.getItem('theme'); } catch (e) {}
+      var dark = t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-bs-theme', dark ? 'dark' : 'light');
+    })();
+  </script>
+</head>
 
-		<div style="text-align:center">
-			<video width="100%" controls autoplay loop muted>
-				<source src="video/bunny_editing.mp4" type="video/mp4">
-			</video>
-			<caption style="font-family:aaargh">
-				Using reconstructed 4D depth for light field editing.
-			</caption>
-		</div>
-	</div>
+<body>
+  <!-- The BVC bar (crest, section links, social icons, theme toggle) is
+       injected by the shared project.js. -->
 
-	<span style="display:block;clear:both;height:2em"></span>
+  <main class="project">
 
-	<div class="section">
-		<hr/>
+    <!-- ============ Paper 1: Edge-aware Bidirectional Diffusion ============ -->
 
-		<div class="title">
-			<h2>Edge-aware Bi-directional Diffusion for Dense Depth Estimation from Light Fields</h2>
-			<h4>BMVC 2021</h4>
-		</div>
+    <h1 class="project-title">
+      Edge-aware Bidirectional Diffusion
+      <span class="subtitle">Dense Depth Estimation from Light Fields</span>
+    </h1>
+    <p class="venue">British Machine Vision Conference (BMVC) 2021</p>
 
-		<div class="icon-container">
-			<span class="icon">
-				<a href="https://arxiv.org/abs/2107.02967"><img src="img/arXiv-logo.png" onmouseover="this.src='img/arXiv-logo-over.png'" onmouseout="this.src='img/arXiv-logo.png'"/></a>
-			</span>
-			<span class="icon">
-				<a href="https://github.com/brownvc/lightfielddepth"><img src="img/github-logo.png" onmouseover="this.src='img/github-logo-over.png'" onmouseout="this.src='img/github-logo.png'"/></a>
-			</span>
-		</div>
-
-		<img width="100%" src="./img/bididepth.png">
-		<caption style="font-family:aaargh">
-			Light field editing requires high-accuracy depth and occlusion edges. 
-			Middle: Incorrect depth or occlusion edges make inserted content appear with artifacts and with overhanging regions. 
-			Right: The accuracy of our depth edges allows easier occlusion handling when editing light fields. The inset shows our disparity map.
-		</caption>
-
-		<span style="display:block;clear:both;"></span>
-
-		<h3 style="font-family: aaargh;">Abstract</h3>
-		<p>
-		We present an algorithm to estimate fast and accurate depth maps from light fields via a sparse set of depth edges and gradients. Our proposed approach is based around the idea that true depth edges are more sensitive than texture edges to local constraints, and so they can be reliably disambiguated through a bidirectional diffusion process. First, we use epipolar-plane images to estimate sub-pixel disparity at a sparse set of pixels. To find sparse points efficiently, we propose an entropy-based refinement approach to a line estimate from a limited set of oriented filter banks. Next, to estimate the diffusion direction away from sparse points, we optimize constraints at these points via our bidirectional diffusion method. This resolves the ambiguity of which surface the edge belongs to and reliably separates depth from texture edges, allowing us to diffuse the sparse set in a depth-edge and occlusion-aware manner to obtain accurate dense depth maps.
-		</p>
-
-		<div class="citation">
-			<h3 style="font-family:aaargh">BibTex Citation</h3>
-			<div style="background-color:rgba(230, 230, 230, 1.0); padding:20px">
-				@inproceedings{khan2021edgeaware,<br>
-					<div style="margin-left: 40px">
-					title={Edge-aware Bidirectional Diffusion for Dense Depth Estimation from Light Fields}, <br>
-					author={Numair Khan and Min H. Kim and James Tompkin}, <br>
-					booktitle={British Machine Vision Conference (BMVC)}, <br>
-					year={2021}, <br>
-					</div>
-				}<br>
-			</div>
-		</div>
-
-	</div>
-
-
-    <hr/>
-
-	<div class="section">
-		<div class="title">
-			<h2>View-consistent 4D Light Field Depth Estimation</h2>
-			<h4>BMVC 2020</h4>
-		</div>
-
-		<div class="icon-container">
-			<span class="icon">
-				<a href="https://www.bmvc2020-conference.com/assets/papers/0395.pdf"><img src="img/pdf-logo.png" onmouseover="this.src='img/pdf-logo-over.png'" onmouseout="this.src='img/pdf-logo.png'"/></a>
-			</span>
-			<span class="icon">
-				<a href="https://arxiv.org/abs/2009.04065"><img src="img/arXiv-logo.png" onmouseover="this.src='img/arXiv-logo-over.png'" onmouseout="this.src='img/arXiv-logo.png'"/></a>
-			</span>
-			<span class="icon">
-				<a href="https://github.com/brownvc/lightfielddepth"><img src="img/github-logo.png" onmouseover="this.src='img/github-logo-over.png'" onmouseout="this.src='img/github-logo.png'"/></a>
-			</span>
-			<span class="icon">
-				<a href="https://www.bmvc2020-conference.com/assets/supp/0395_supp.mp4"><img src="img/video-logo.png" onmouseover="this.src='img/video-logo-over.png'" onmouseout="this.src='img/video-logo.png'"/></a>
-			</span>
-		</div>
-
-		<span style="display:block;clear:both;"></span>
-
-		<h3 style="font-family:aaargh">Abstract</h3>
-		<p>
-			We propose a method to compute depth maps for every sub-aperture image in a lightfield in a view consistent way. 
-			Previous light field depth estimation methods typically estimate a depth map only for the central sub-aperture view, and struggle with view consistent estimation.  
-			Our method precisely defines depth edges via EPIs, then we diffuse these edges spatially within the central view. 
-			These depth estimates are then propagated to all other views in an occlusion-aware way. 
-			Finally, disoccluded regions are completed by diffusion in EPI space. 
-			Our method runs efficiently with respect to both other classical and deep learning-based approaches, 
-			and achieves competitive quantitative metrics and qualitative performance on both synthetic and real-world light fields.
-		</p>
-
-		<div class="citation">
-			<h3 style="font-family:aaargh">BibTex Citation</h3>
-			<div style="background-color:rgba(230, 230, 230, 1.0); padding:20px">
-				@article{khan2020vclfd, </br>
-				<div style="margin-left: 40px">
-					title={View-consistent 4D Light Field Depth Estimation}, </br>
-					author={Numair Khan and Min H. Kim and James Tompkin}, </br>
-					journal={British Machine Vision Conference}, </br>
-					year={2020}, </br>
-				</div>
-				}</br>
-			</div>
-		</div>
-
-		<h3 style="font-family:aaargh">Depth Consistency Comparisons</h3>
-		<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="7500">
-			<!-- Indicators -->
-			<ol class="carousel-indicators">
-			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			<li data-target="#myCarousel" data-slide-to="1"></li>
-			<li data-target="#myCarousel" data-slide-to="2"></li>
-			<li data-target="#myCarousel" data-slide-to="3"></li>
-			</ol>
-			
-			<!-- Wrapper for slides -->
-			<div class="carousel-inner">
-			<div class="item active">
-				<img src="img/cotton_novel.gif" style="width:100%;">
-			</div>
-			
-			<div class="item">
-				<img src="img/boxes_novel.gif" style="width:100%;">
-			</div>
-			
-			<div class="item">
-				<img src="img/dino_novel.gif" style="width:100%;">
-			</div>
-			
-			<div class="item">
-				<img src="img/sideboard_novel.gif" style="width:100%;">
-			</div>
-			</div>
-			
-			<!-- Left and right controls -->
-			<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-			<span class="glyphicon glyphicon-chevron-left"></span>
-			<span class="sr-only">Previous</span>
-			</a>
-			<a class="right carousel-control" href="#myCarousel" data-slide="next">
-			<span class="glyphicon glyphicon-chevron-right"></span>
-			<span class="sr-only">Next</span>
-			</a>
-		</div>
-
-		<h3 style="font-family:aaargh">Presentation Video</h3>
-		<video src="./video/presentation.mp4" width="100%" controls></video>
-
-		<h3 style="font-family:aaargh">Supplemental Video</h3>
-		<video src="https://www.bmvc2020-conference.com/assets/supp/0395_supp.mp4" width="100%" controls></video>
-
-		<h3 style="font-family:aaargh">Additional Results</h3>
-		Our method works with both real and synthetic datasets, and a range of baselines:
-		<div id="results">
-			<img src="img/result_stillLife.gif">
-			<img src="img/result_rustyFence.gif">
-			<img src="img/result_bulldozer.gif">
-			<img src="img/result_bikes.gif">
-			<img src="img/result_buddha.gif">
-			<img src="img/result_eucalyptus.gif">
-			<img src="img/result_jellybeans.gif">
-			<img src="img/result_horses.gif">
-			<img src="img/result_jewels.gif">
-			<img src="img/result_papillon.gif">
-			<img src="img/result_silos.gif">
-			<img src="img/result_truck.gif">
-		</div>
+    <div class="authors">
+      <span class="author"><a href="https://cs.brown.edu/~nkhan6" target="_blank" rel="noopener">Numair Khan</a><sup>1</sup>,</span>
+      <span class="author"><a href="http://vclab.kaist.ac.kr/minhkim/" target="_blank" rel="noopener">Min H. Kim</a><sup>2</sup>,</span>
+      <span class="author"><a href="https://www.jamestompkin.com/" target="_blank" rel="noopener">James Tompkin</a><sup>1</sup></span>
+    </div>
+    <div class="affil-logos">
+      <span class="logo-item"><sup>1</sup><span data-logo="brown-cs"></span></span>
+      <span class="logo-item"><sup>2</sup><span data-logo="kaist"></span></span>
     </div>
 
-	<div class="section">
-		<hr/>
+    <nav class="resource-row">
+      <a href="https://arxiv.org/abs/2107.02967">arXiv</a>
+      <a href="https://github.com/brownvc/lightfielddepth">Code</a>
+    </nav>
 
-		<div class="title">
-			<h2>Acknowledgements</h2>
-		</div>
+    <figure class="teaser">
+      <video src="./video/bunny_editing.mp4" autoplay muted loop playsinline></video>
+      <figcaption>Using reconstructed 4D depth for light field editing.</figcaption>
+    </figure>
 
-		<p>Numair Khan thanks an Andy van Dam PhD Fellowship, James Tompkin thanks a gift from Cognex, and Min H. Kim thanks Korea NRF grant (2019R1A2C3007229).</p>
+    <section id="abstract-section">
+      <h2 id="abstract">Abstract</h2>
+      <p>
+        We present an algorithm to estimate fast and accurate depth maps from light fields via a sparse set of depth edges and gradients. Our proposed approach is based around the idea that true depth edges are more sensitive than texture edges to local constraints, and so they can be reliably disambiguated through a bidirectional diffusion process. First, we use epipolar-plane images to estimate sub-pixel disparity at a sparse set of pixels. To find sparse points efficiently, we propose an entropy-based refinement approach to a line estimate from a limited set of oriented filter banks. Next, to estimate the diffusion direction away from sparse points, we optimize constraints at these points via our bidirectional diffusion method. This resolves the ambiguity of which surface the edge belongs to and reliably separates depth from texture edges, allowing us to diffuse the sparse set in a depth-edge and occlusion-aware manner to obtain accurate dense depth maps.
+      </p>
+    </section>
 
-		<p>"Edge-aware Bi-directional Diffusion for Dense Depth Estimation from Light Fields" was initially published as a tech report by Brown University; available <a href="http://cs.brown.edu/research/pubs/techreports/reports/CS-20-01.html">here</a>.</p>
+    <section id="method-section">
+      <h2 id="method">Method</h2>
+      <figure>
+        <img src="./img/bididepth.png" alt="Light field editing comparison: incorrect depth edges cause insertion artifacts, while accurate depth edges allow clean occlusion handling">
+        <figcaption>
+          Light field editing requires high-accuracy depth and occlusion edges. Middle: incorrect depth or occlusion edges make inserted content appear with artifacts and with overhanging regions. Right: the accuracy of our depth edges allows easier occlusion handling when editing light fields. The inset shows our disparity map.
+        </figcaption>
+      </figure>
+    </section>
 
-		<div class="citation">
-			<h3 style="font-family:aaargh">BibTex Citation</h3>
-			<div style="background-color:rgba(230, 230, 230, 1.0); padding:20px">
-				@techreport(khan2020falfd, </br>
-				<div style="margin-left: 40px">
-						title={Fast and Accurate {4D} Light Field Depth Estimation}, </br>
-						author={Numair Khan and Min H. Kim and James Tompkin}, </br>
-						institution={Brown University}, </br>
-						number={CS-20-01}, </br>
-						month={August}, </br>
-				</div>
-			}
-			</div>
-		</div>
+    <section id="citation-section">
+      <h2 id="citation">Citation</h2>
+      <pre class="citation"><code>@inproceedings{Khan_2021,
+    series    = {BMVC 2021},
+    title     = {Edge-aware Bidirectional Diffusion for Dense Depth Estimation from Light Fields},
+    url       = {http://dx.doi.org/10.5244/C.35.182},
+    DOI       = {10.5244/c.35.182},
+    booktitle = {Proceedings of the British Machine Vision Conference 2021},
+    publisher = {British Machine Vision Association},
+    author    = {Khan, Numair and Kim, Min H. and Tompkin, James},
+    year      = {2021},
+    collection= {BMVC 2021}
+}</code></pre>
+      <p class="muted">This work initially appeared as a Brown University technical report, <a href="http://cs.brown.edu/research/pubs/techreports/reports/CS-20-01.html">Fast and Accurate 4D Light Field Depth Estimation (CS-20-01)</a>.</p>
+    </section>
 
-		<!-- Little bit of space -->
-		<p></p>
+    <!-- ========= Paper 2: View-consistent 4D Light Field Depth Estimation ========= -->
 
-		<table style="margin: auto; text-align: center;">
-			<tbody>
-				<tr>
-					<td>
-						<a href="http://visual.cs.brown.edu/"><img src="./img/logos/BrownCSLogo.png" width=250px style="margin-right: 20px"></a>
-					</td>
-					<td>
-						<img src="img/logos/KAISTlogo.png" width=150px style="margin-right: 10px">
-					</td>
-				</tr>
-			</tbody>
-		</table>
+    <h1 class="project-title">
+      View-consistent 4D Light Field Depth Estimation
+    </h1>
+    <p class="venue">British Machine Vision Conference (BMVC) 2020 <strong>(Oral)</strong></p>
 
-		<!-- Little bit of space -->
-		<p></p>
-	</div>
+    <div class="authors">
+      <span class="author"><a href="https://cs.brown.edu/~nkhan6" target="_blank" rel="noopener">Numair Khan</a><sup>1</sup>,</span>
+      <span class="author"><a href="http://vclab.kaist.ac.kr/minhkim/" target="_blank" rel="noopener">Min H. Kim</a><sup>2</sup>,</span>
+      <span class="author"><a href="https://www.jamestompkin.com/" target="_blank" rel="noopener">James Tompkin</a><sup>1</sup></span>
+    </div>
+    <div class="affil-logos">
+      <span class="logo-item"><sup>1</sup><span data-logo="brown-cs"></span></span>
+      <span class="logo-item"><sup>2</sup><span data-logo="kaist"></span></span>
+    </div>
 
-  </body>
+    <nav class="resource-row">
+      <a href="https://www.bmvc2020-conference.com/assets/papers/0395.pdf">Paper</a>
+      <a href="https://arxiv.org/abs/2009.04065">arXiv</a>
+      <a href="https://github.com/brownvc/lightfielddepth">Code</a>
+      <a href="#video-2">Video</a>
+    </nav>
+
+    <section id="abstract-2-section">
+      <h2 id="abstract-2">Abstract</h2>
+      <p>
+        We propose a method to compute depth maps for every sub-aperture image in a lightfield in a view consistent way. Previous light field depth estimation methods typically estimate a depth map only for the central sub-aperture view, and struggle with view consistent estimation. Our method precisely defines depth edges via EPIs, then we diffuse these edges spatially within the central view. These depth estimates are then propagated to all other views in an occlusion-aware way. Finally, disoccluded regions are completed by diffusion in EPI space. Our method runs efficiently with respect to both other classical and deep learning-based approaches, and achieves competitive quantitative metrics and qualitative performance on both synthetic and real-world light fields.
+      </p>
+    </section>
+
+    <section id="results-2-section">
+      <h2 id="results-2">Results</h2>
+      <p>Depth consistency comparisons across novel views:</p>
+      <div class="snap-row">
+        <img src="./img/cotton_novel.gif" alt="View-consistent depth on the Cotton scene">
+        <img src="./img/boxes_novel.gif" alt="View-consistent depth on the Boxes scene">
+        <img src="./img/dino_novel.gif" alt="View-consistent depth on the Dino scene">
+        <img src="./img/sideboard_novel.gif" alt="View-consistent depth on the Sideboard scene">
+      </div>
+
+      <p>Our method works with both real and synthetic datasets, and a range of baselines:</p>
+      <div class="snap-row">
+        <img src="./img/result_stillLife.gif" alt="Depth result: Still Life">
+        <img src="./img/result_rustyFence.gif" alt="Depth result: Rusty Fence">
+        <img src="./img/result_bulldozer.gif" alt="Depth result: Bulldozer">
+        <img src="./img/result_bikes.gif" alt="Depth result: Bikes">
+        <img src="./img/result_buddha.gif" alt="Depth result: Buddha">
+        <img src="./img/result_eucalyptus.gif" alt="Depth result: Eucalyptus">
+        <img src="./img/result_jellybeans.gif" alt="Depth result: Jellybeans">
+        <img src="./img/result_horses.gif" alt="Depth result: Horses">
+        <img src="./img/result_jewels.gif" alt="Depth result: Jewels">
+        <img src="./img/result_papillon.gif" alt="Depth result: Papillon">
+        <img src="./img/result_silos.gif" alt="Depth result: Silos">
+        <img src="./img/result_truck.gif" alt="Depth result: Truck">
+      </div>
+    </section>
+
+    <section id="video-2-section">
+      <h2 id="video-2">Video</h2>
+      <video class="center" style="display:block; width:100%;" controls preload="metadata">
+        <source src="./video/bmvc2020_supplementary_vid.mp4" type="video/mp4">
+      </video>
+      <p class="centerContent"><a href="./video/bmvc2020_supplementary_vid.mp4" download>Download supplemental video (MP4)</a></p>
+
+      <!-- VERIFY: presentation.mp4 is placed here under the BMVC 2020 oral paper
+           (matches the legacy page layout and this paper's oral status), but
+           pubs.json links video_presentation to the 2021 Edge-aware paper. -->
+      <h3>Presentation</h3>
+      <video class="center" style="display:block; width:100%;" controls preload="metadata">
+        <source src="./video/presentation.mp4" type="video/mp4">
+      </video>
+      <p class="centerContent"><a href="./video/presentation.mp4" download>Download presentation video (MP4)</a></p>
+    </section>
+
+    <section id="citation-2-section">
+      <h2 id="citation-2">Citation</h2>
+      <pre class="citation"><code>@inproceedings{Khan_2020,
+    series    = {BMVC 2020},
+    title     = {View-consistent 4D Light Field Depth Estimation},
+    url       = {http://dx.doi.org/10.5244/C.34.103},
+    DOI       = {10.5244/c.34.103},
+    booktitle = {Proceedings of the British Machine Vision Conference 2020},
+    publisher = {British Machine Vision Association},
+    author    = {Khan, Numair and Kim, Min H. and Tompkin, James},
+    year      = {2020},
+    collection= {BMVC 2020}
+}</code></pre>
+    </section>
+
+    <!-- ==================== Shared closing sections ==================== -->
+
+    <section id="acknowledgements-section">
+      <h2 id="acknowledgements">Acknowledgements</h2>
+      <p>
+        Numair Khan thanks an Andy van Dam PhD Fellowship, James Tompkin thanks a gift from Cognex, and Min H. Kim thanks a Korea NRF grant (2019R1A2C3007229).
+      </p>
+    </section>
+
+    <footer class="logos">
+      <span data-logo="brown-cs"></span>
+      <span data-logo="kaist"></span>
+    </footer>
+
+  </main>
+</body>
 
 </html>
